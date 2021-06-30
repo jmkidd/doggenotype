@@ -75,7 +75,7 @@ doggenotype.remove_tmp_dir(myData)
 cmd = 'touch %s ' % myData['completeToken']
 print(cmd,flush=True)
 myData['logFile'].write(cmd + '\n')
-dogmap.runCMD(cmd)
+doggenotype.runCMD(cmd)
 
 myData['endTime'] = time.localtime()
 myData['tEnd'] = time.time()
