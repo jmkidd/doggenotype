@@ -27,6 +27,16 @@ def runCMD_output(cmd):
        resLines.append(i)
     return resLines
 #############################################################################        
+#####################################################################
+def open_bgzip_write(fileName,threads = 1):
+    try:
+        gc = 'bgzip -@ %i > %s ' % (threads, fileName)
+        outFile = os.popen(gc, 'w')
+    except:
+        print("ERROR!! Couldn't open the output file " + fileName+ " (with bgzip)\n")
+        sys.exit(1)
+    return outFile
+#####################################################################
 # setup paths to default programs to use and checks for required programs
 def check_prog_paths(myData):        
     myData['logFile'].write('\nChecking for required programs...\n')
@@ -185,6 +195,7 @@ def run_GenomicsDBImport(myData):
     cmd += ' --sample-name-map %s ' % myData['samples']
     cmd += ' --batch-size 50 '
     cmd += ' --genomicsdb-workspace-path %s ' %  myData['genomicsdb']
+    cmd += ' --genomicsdb-shared-posixfs-optimizations '  # to check
 
 
     print(cmd,flush=True)
